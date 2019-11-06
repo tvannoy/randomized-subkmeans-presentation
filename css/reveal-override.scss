@@ -1,10 +1,9 @@
-@import url(//fonts.googleapis.com/css?family=Cabin:400,700);
-@import url(//fonts.googleapis.com/css?family=Special+Elite:400,700);
-@import url(//fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
-@import url(//cdn.jsdelivr.net/npm/hack-font/build/web/hack.css);
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap');
 
 .reveal {
-    font-family: "Open Sans Condensed", sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: normal;
     color: #555555;
 
@@ -22,8 +21,8 @@
         /* Blow image up to full screen size */
         height: auto;
         width: 100%;
-        max-width: 80%;
-        max-height: 80%;
+        max-width: 95%;
+        max-height: 95%;
         margin: 2%;
     }
 
@@ -54,9 +53,10 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-family: "Cabin", sans-serif;
+        font-family: "Nunito", sans-serif;
         font-weight: bold;
-        text-transform: uppercase;
+        font-variant: small-caps;
+        text-transform: none;
 	strong {
         color: black;
 	    text-shadow: none;
@@ -91,19 +91,19 @@
     }
 
     a {
-        font-family: "Open Sans", monospace !important;
+        font-family: "Share Tech Mono", monospace !important;
         white-space: nowrap;
     }
 
     code {
-        font-family: "Hack", monospace !important;
+        font-family: "Source Code Pro", monospace !important;
         color: black !important;
         text-shadow: none;
         text-transform: none;
     }
 
     pre code {
-        font-family: "Hack", monospace !important;
+        font-family: "Source Code Pro", monospace !important;
         background: inherit !important;
         text-shadow: none;
         text-transform: none;
@@ -143,20 +143,6 @@
         p {
             display: inline;
         }
-    }
-
-    .stamp {
-        position: absolute;
-        color: red !important;
-        font-size: 6em !important;
-        font-family: "Special Elite" !important;
-        transform: rotate(-45deg);
-        position:absolute;
-        left:50%;
-        top:50%;
-        margin-left:-20vw;
-        margin-top:-10vh;
-        text-shadow: none;
     }
 
     .caption {
