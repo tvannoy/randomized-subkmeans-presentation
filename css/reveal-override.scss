@@ -155,6 +155,10 @@
     	bottom: 0;
         font-size: small;
     }
+
+    .slides section .fragment {
+        transition: all .6s ease;
+    }
 }
 
 @media print {
