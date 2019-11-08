@@ -34,7 +34,6 @@
         <section id="title" data-markdown>
             <textarea data-template>
                 ### Improved Subspace K-Means Performance via a Randomized Matrix Decomposition
-                **Subtitle**
                 ***
                 **Trevor Vannoy**
 
@@ -68,17 +67,48 @@
             <section>
                 <h1>Results</h1>
             </section>
+            <section>
+            	<p class="fragment" data-fragment-index="3">Appears last</p>
+            	<p class="fragment" data-fragment-index="1">Appears first</p>
+            	<p class="fragment" data-fragment-index="2">Appears second</p>
+            </section>
             <section id="runtime vs dimension">
                 <h4>Runtime vs Dimension</h4>
-                <img class="stretch" src="images/runtime_v_dim.svg" />
+                <div class="stretch" style="position:relative; margin:0 auto;">
+                    <img src="images/runtime_v_dim.svg" style="position:absolute;top:0;left:0"/>
+                    <img class="fragment" data-fragment-index="1" src="images/runtime_v_dim2.svg" style="position:absolute;top:0;left:0"/>
+                    <img class="fragment" data-fragment-index="2" src="images/runtime_v_dim3.svg" style="position:absolute;top:0;left:0"/>
+                </div>
             </section>
             <section id="runtime vs size">
                 <h4>Runtime vs Size</h4>
-                <img class="stretch" src="images/runtime_v_size.svg" />
+                <div class="stretch" style="position:relative; margin:0 auto;">
+                    <img src="images/runtime_v_size.svg" style="position:absolute;top:0;left:0"/>
+                    <img class="fragment" data-fragment-index="1" src="images/runtime_v_size2.svg" style="position:absolute;top:0;left:0"/>
+                    <img class="fragment" data-fragment-index="2" src="images/runtime_v_size3.svg" style="position:absolute;top:0;left:0"/>
+                </div>
             </section>
             <section id="dataset runtimes">
                 <h4>Dataset Runtimes</h4>
-                <img class="stretch" src="images/runtime_datasets.svg" />
+                <div class="stretch" style="position:relative; margion:0 auto;">
+                    <img src="images/runtime_datasets.svg" style="position:absolute;top:0;left:0"/>
+                    <img class="fragment" src="images/runtime_datasets2.svg" style="position:absolute;top:0;left:0"/>
+                </div>
+            </section>
+            <section id="clustering quality" data-markdown>
+                <textarea data-template>
+                    ### Clustering Quality (NMI)
+
+                    |                 | Randomized Subspace k-means | Subspace k-means | PCA k-means | LDA k-means |
+                    | --------------- | --------------------------: | ---------------: | ----------: | ----------: |
+                    | Plane           | **0.835** (`$m=6$`)            | 0.825            | 0.804       | 0.728       |
+                    | Symbols         | **0.788** (`$m=5$`)            | 0.742            | 0.762       | 0.745       |
+                    | OliveOil        | 0.609 (`$m=3$`)                | 0.657            | 0.673       | **0.690**   |
+                    | StarLightCurves | **0.546** (`$m=2$`)           | 0.542            | 0.507       | 0.542       |
+                    | DrivFace        | 0.191 (`$m=2$`)                | 0.205            | 0.203       | **0.209**   |
+                    | RNA-Seq         | 0.659 (`$m=4$`)                | 0.679            | **0.680**   | 0.668       |
+                </textarea>
+
             </section>
             <section id="subspace projections">
                 <h4>Subspace Projections</h4>
@@ -150,6 +180,13 @@ Reveal.initialize({
         url: 'https://reveal-js-multiplex-ccjbegmaii.now.sh'
     },
 
+    // math: {
+	// 	mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js',
+	// 	config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+	// 	// pass other options into `MathJax.Hub.Config()`
+	// 	TeX: { Macros: macros }
+	// },
+
     // Optional libraries used to extend on reveal.js
     dependencies: [
         { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -161,6 +198,7 @@ Reveal.initialize({
         { src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
         { src: 'reveal.js/plugin/multiplex/master.js', async: true },
         { src: 'reveal.js-menu/menu.js', async: true, condition: function() { return !!document.body.classList; } },
+        { src: 'reveal.js/plugin/math/math.js', async: true },
     ]
 });
 
