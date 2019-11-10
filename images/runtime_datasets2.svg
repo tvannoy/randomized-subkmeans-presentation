@@ -16,7 +16,7 @@
    width="504pt"
    id="svg2389"
    sodipodi:docname="runtime_datasets2.svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata2393">
     <rdf:RDF>
@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -38,17 +38,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2540"
-     inkscape:window-height="1021"
+     inkscape:window-width="2560"
+     inkscape:window-height="1330"
      id="namedview2391"
      showgrid="false"
      inkscape:zoom="1.6477273"
-     inkscape:cx="245.62106"
+     inkscape:cx="108.15899"
      inkscape:cy="217.25974"
-     inkscape:window-x="3650"
-     inkscape:window-y="689"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="patch_1" />
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="figure_1" />
   <defs
      id="defs1810"
      style="stroke-linecap:butt;stroke-linejoin:round">
@@ -177,7 +177,7 @@
              id="text_6"
              style="stroke-linecap:butt;stroke-linejoin:round">
             <text
-               style="font-style:normal;font-weight:normal;font-size:12px;font-family:'DejaVu Sans';stroke-linecap:butt;stroke-linejoin:round"
+               style="font-style:normal;font-weight:normal;font-size:14px;font-family:'source sans pro';stroke-linecap:butt;stroke-linejoin:round;font-variant:normal;font-stretch:normal;line-height:normal;-inkscape-font-specification:'source sans pro';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east_asian:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;"
                transform="rotate(-20,1273.8212,-980.949)"
                id="text1844">RNA-Seq</text>
           </g>
@@ -1274,7 +1274,8 @@
         </g>
         <g
            id="text_12"
-           style="stroke-linecap:butt;stroke-linejoin:round">
+           style="stroke-linecap:butt;stroke-linejoin:round"
+           transform="translate(-0.83968251)">
           <text
              style="font-style:normal;font-weight:normal;font-size:14px;font-family:'DejaVu Sans';text-anchor:middle;stroke-linecap:butt;stroke-linejoin:round"
              transform="rotate(-90,14.388438,197.01)"
