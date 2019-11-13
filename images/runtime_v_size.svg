@@ -16,7 +16,7 @@
    width="504pt"
    id="svg9075"
    sodipodi:docname="runtime_v_size.svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata9079">
     <rdf:RDF>
@@ -38,17 +38,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2540"
-     inkscape:window-height="1021"
+     inkscape:window-width="2560"
+     inkscape:window-height="1330"
      id="namedview9077"
      showgrid="false"
-     inkscape:zoom="0.89393939"
-     inkscape:cx="660.78309"
-     inkscape:cy="302.138"
-     inkscape:window-x="3650"
-     inkscape:window-y="689"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="matplotlib.axis_2" />
+     inkscape:zoom="3.5757576"
+     inkscape:cx="138.93563"
+     inkscape:cy="123.15495"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="matplotlib.axis_1" />
   <defs
      id="defs8537"
      style="stroke-linecap:butt;stroke-linejoin:round">
@@ -1112,9 +1112,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.171875"
-                   id="tspan8553">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan16420">2</tspan>
+                   id="tspan8553"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1154">2</tspan>
 </tspan>
               </text>
             </g>
@@ -1154,9 +1155,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.171875"
-                   id="tspan8568">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan16422">3</tspan>
+                   id="tspan8568"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1150">3</tspan>
 </tspan>
               </text>
             </g>
@@ -1196,9 +1198,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.28125"
-                   id="tspan8583">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan16424">4</tspan>
+                   id="tspan8583"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1146">4</tspan>
 </tspan>
               </text>
             </g>
@@ -1238,9 +1241,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.28125"
-                   id="tspan8598">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan16426">5</tspan>
+                   id="tspan8598"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1148">5</tspan>
 </tspan>
               </text>
             </g>

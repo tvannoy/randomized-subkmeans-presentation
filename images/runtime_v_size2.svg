@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,12 +43,12 @@
      id="namedview1724"
      showgrid="false"
      inkscape:zoom="2.5284424"
-     inkscape:cx="-12.040355"
-     inkscape:cy="318.01291"
+     inkscape:cx="278.05919"
+     inkscape:cy="49.072633"
      inkscape:window-x="-12"
      inkscape:window-y="-12"
      inkscape:window-maximized="1"
-     inkscape:current-layer="text_12">
+     inkscape:current-layer="matplotlib.axis_1">
     <inkscape:grid
        type="xygrid"
        id="grid3666" />
@@ -132,9 +132,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.171875"
-                   id="tspan1200">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan3640">2</tspan>
+                   id="tspan1200"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1146">2</tspan>
 </tspan>
               </text>
             </g>
@@ -174,9 +175,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.171875"
-                   id="tspan1215">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan3642">3</tspan>
+                   id="tspan1215"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1148">3</tspan>
 </tspan>
               </text>
             </g>
@@ -216,9 +218,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.28125"
-                   id="tspan1230">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan3644">4</tspan>
+                   id="tspan1230"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1150">4</tspan>
 </tspan>
               </text>
             </g>
@@ -258,9 +261,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    id="tspan1245"
                    y="-0.28125"
-                   x="0 7.6347661">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan3646">5</tspan>
+                   x="0 7.6347661"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1152">5</tspan>
 </tspan>
               </text>
             </g>

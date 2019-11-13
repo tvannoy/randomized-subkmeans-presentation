@@ -1,16 +1,26 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title></title>
+    <meta charset="utf-8">
+
+    <title>Improved Subspace K-means Performance via a Randomized Matrix Decomposition</title>
+    <meta name="author" content="Trevor Vannoy">
+
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- reveal.js CSS theme and local overrides -->
+    <link rel="stylesheet" href="reveal.js/css/reset.css"/>
     <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
     <link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme"/>
     <link rel="stylesheet" href="css/reveal-override.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
+
+    <!-- Mathjax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="highlight.js/src/styles/github.css" />
@@ -18,18 +28,23 @@
     <!-- For JavaScript-generated QR codes -->
     <link rel="stylesheet" href="css/qrcode.css" />
 
-    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <!-- Printing and PDF exports -->
     <script>
-      document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
   </head>
+
   <body>
     <div class="reveal">
       <div class="slides">
         <section id="qrcode" data-menu-title="QR code">
           <div class="qrcode" id="qrcode-talk"></div>
-          <p><a href="https://example.com/link/to/this/talk" target="_blank"
-                id="talk">https://example.com/link/to/this/talk</a></p>
+          <p><a href="https://tvannoy.github.io/randomized-subkmeans-presentation" target="_blank"
+                id="talk">tvannoy.github.io/randomized-subkmeans-presentation</a></p>
         </section>
         <section id="title" data-markdown>
             <textarea data-template>
@@ -37,111 +52,405 @@
                 ***
                 **Trevor Vannoy**
 
+                Jacob Senecal, Veronika Strnadova-Neeley
+                <br />
+                <br />
                 IEEE GlobalSIP 2019 | Nov. 13 2019
             </textarea>
         </section>
         <section id="outline" data-markdown>
             <textarea data-template>
                 ## Outline
-                - section 1
-                - section 2
-                - section 3
+                - Clustering in high dimensions
+                - Subspace k-means
+                - Randomized Subspace k-means
+                - Experiments
+                - Results
+                - Conclusions
             </textarea>
         </section>
         <section>
-            <h2>Slide Number 2</h2>
-            <div class="flexbox-container">
-                <div>
-                    <ul>
-                        <li>two columns!</li>
-                        <li>with an image</li>
-                        <li>and bullet points!</li>
-                    </ul>
+            <section>
+                <h2>Clustering in High Dimensions</h2>
+            </section>
+            <section>
+                <div class="flexbox-container">
+                    <div data-markdown>
+                        <textarea data-template>
+                            ### Problems
+                            - curse of dimensionality
+                            - computational complexity
+                            - visualization
+                        </textarea>
+                    </div>
+                    <div data-markdown>
+                        <textarea data-template>
+                            ### Solutions
+                            - subspace clustering
+                                - separate subspaces
+                                - common subspace
+                        </textarea>
+                    </div>
                 </div>
-                <div>
-                    <img src="images/Tux.svg" />
+                <aside class="notes" data-markdown>
+                    when clustering in high dimensions, you run into several problems:
+                    - curse of dimensionality 
+                        - many features are likely irrelevant
+                        - distance measures are less informative
+                    - as dimensionality grows, runtimes increase
+                    - difficult to visualize cluster relationships
+
+                    subspace clustering methods attempt to resolve many of these problems.
+                    there are many different subspace clustering methods, and they can be
+                    broken up into several classes. Here, we separate algorithms by whether
+                    they project each cluster to it's own subspace or a common subspace. 
+
+                    using separate subspaces can lead to high quality clusters, but the 
+                    the relationships between clusters is not always clear.
+
+                    using a common subspace makes the cluster relationships easier to
+                    understand; in this work, we focus on a common subspace clustering
+                    algorithm. 
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Subspace k-means</h2>
+            </section>
+            <section>
+                <h3>Subspace k-means</h3>
+                <div class="flex-column">
+                    <div>
+                        <ul>
+                            <li style="font-size: 75%">transforms data into a cluster subspace and a noise subspace</li>
+                            <li style="font-size: 75%">alternates between subspace estimation and clustering</li>
+                        </ul>
+                    </div>
+                    <div class="flexbox-container">
+                        <div>
+                            <br />
+                            <h5>cluster subspace</h5>
+                            <img src="images/plane_cluster.svg" />
+                        </div>
+                        <div>
+                            <br />
+                            <h5>noise subspace</h5>
+                            <img src="images/plane_noise.svg" />
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <aside class="notes" data-markdown>
+                    subspace k-means is a recent common subspace clustering algorithm that transforms the data into
+                    orthogonal cluster and noise subspaces; it iteratively updates the subspaces and clusters until
+                    convergence.
+
+                    example of a dataset projected into cluster and noise subspaces; colors represent predicted 
+                    class labels. 
+                </aside>
+            </section>
+            <section>
+                <h3>Objective Function</h3>
+                <span>\(\mathcal{J} = \bigg[\sum_{i=1}^k \sum_{\mathbf{x} \in C_i} ||\)</span>
+                <span class="fragment" data-fragment-index="1">
+                    <span class="fragment highlight-blue" data-fragment-index="2">\(P_C^T\)</span>
+                    <span class="fragment highlight-red" data-fragment-index="4">\(V^T\)</span>
+                </span>
+                <span>\(\mathbf{x} - \)</span>
+                <span class="fragment" data-fragment-index="1">
+                    <span class="fragment highlight-blue" data-fragment-index="2">\(P_C^T\)</span>
+                    <span class="fragment highlight-red" data-fragment-index="4">\(V^T\)</span>
+                </span>
+                <span>\(\boldsymbol{\mu}_i||^2 \bigg]\)</span>
+                <span class="fragment" data-fragment-index="1">\(+\sum_{\mathbf{x \in \mathcal{D}}} ||\)
+                    <span class="fragment highlight-orange" data-fragment-index="3">\(P_N^T\)</span>
+                    <span class="fragment highlight-red" data-fragment-index="4">\(V^T\)</span>
+                    <span>\(\mathbf{x} - \)</span>
+                    <span class="fragment highlight-orange" data-fragment-index="3">\(P_N^T\)</span>
+                    <span>\(\boldsymbol{\mu}_{\mathcal{D}}||^2\)</span>
+                </span>
+
+                <span class="fragment" data-fragment-index="2">
+                    <p class="fragment highlight-blue" data-fragment-index="2">\(P_C \equiv\)  cluster space projection matrix</p>
+                </span>
+                <span class="fragment" data-fragment-index="3">
+                <p class="fragment highlight-orange" data-fragment-index="3">\(P_N \equiv\)  noise space projection matrix</p>
+                    </span>
+                <span class="fragment" data-fragment-index="4">
+                    <p class="fragment highlight-red" data-fragment-index="4">\(V \equiv\)  transformation matrix</p>
+                </span>
+
+                <aside class="notes" data-markdown>
+                    subspace k-means modifies the vanilla k-means objective function by adding a tradeoff between
+                    cluster and noise subspaces.
+
+                    the first term represents the cluster subspace, and the second term represents the noise subspace
+
+                    explain the new terms
+
+                    features that are useful for clustering are better represented by the first term; other features
+                    are considered noise and are better represented by the mean of the dataset in the second term.
+                </aside>
+            </section>
+            <section>
+                <h3>Objective Function</h3>
+                <span>
+                    \begin{align}
+                        \mathcal{J} = &\text{tr} \bigg( P_C P_C^T V^T \underbrace{\bigg( \bigg[ \sum_{i=1}^k S_i \bigg] - 
+                        S_{\mathcal{D}} \bigg)}_{ \Sigma} V \bigg) \\ &+ 
+                        \underbrace{\text{tr} (V^T S_{\mathcal{D}} V)}_{\text{const. w.r.t } V}
+                    \end{align}
+                </span>
+                <p class="fragment">\(S_i\equiv \) cluster scatter matrix</p>
+                <p class="fragment">\(S_\mathcal{D} \equiv \) dataset scatter matrix</p>
+                <aside class="notes" data-markdown>
+                    after lots of algebra, the objective function can be rewritten as shown here. 
+
+                    explain new terms. 
+
+                    sigma is the sum of the cluster scatter matrices minus the dataset scatter matrix
+                </aside>
+            </section>
+            <section>
+                <h3>Minimization</h3>
+                \(\mathcal{J} = \text{tr} \bigg( P_C P_C^T V^T \underbrace{\bigg( \bigg[ \sum_{i=1}^k S_i \bigg] - 
+                S_{\mathcal{D}} \bigg)}_{ \Sigma} V \bigg) \dots \) 
+                <br /><br />
+                <ul>
+                    <li>put eigenvectors of \(\Sigma\) into \(V\) in ascending order</li>
+                    <li>keep the negative eigenvalues via \(P_C P_C^T\)</li>
+                </ul>
+
+                <aside class="notes" data-markdown>
+                    minimizing this objective function can be framed as an eigenvalue decomposition.
+
+                    to minimize it, put the eigenvectors of Sigma into V in ascending order according
+                    to their eigenvalues.
+
+                    the trace sums the eigenvalues of Sigma, so keeping just the negative eigenvalues
+                    minimizes the function. Due to this, the number of negative eigenvalues becomes the 
+                    dimension of the cluster subspace.
+
+                    minizing this objective function requires updating the transformation matrix by computing 
+                    a large eigenvalue decomposition every iteration, which leads to a poor computational complexity
+                </aside>
+
+            </section>
+            <section>
+                <h3>Computational Complexity</h3>
+                <span>\(\mathcal{O}\big(\)</span>
+                <span>\(I\)</span>
+                <span>\((\)</span>
+                <span class="fragment highlight-blue" data-fragment-index="1">\(mk |\mathcal{D}|\)</span>
+                <span>\(+\)</span>
+                <span class="fragment highlight-orange" data-fragment-index="2">\(d^2 |\mathcal{D}|\)</span>
+                <span>\(+ \)</span> 
+                <span class="fragment highlight-red" data-fragment-index="3">\(d^3\)</span>
+                <span>\()\big)\)</span>
+                <span class="fragment" data-fragment-index="1">
+                    <p class="fragment fade-in highlight-blue" data-fragment-index="1">k-means</p>
+                </span>
+                <span class="fragment" data-fragment-index="2">
+                    <p class="fragment fade-in highlight-orange" data-fragment-index="2">scatter matrix</p>
+                </span>
+                <span class="fragment" data-fragment-index="3">
+                    <p class="fragment fade-in highlight-red" data-fragment-index="3">eigenvalue decomposition</p>
+                </span>
+
+                <aside class="notes" data-markdown>
+                    - I is the number of iterations
+                    - m is the dimensionality of cluster subspace
+                    - k is the number of clusters
+                    - d is the dimensionality of the original space
+                    - D is the number of instances in the dataset
+
+                    highlight where each term comes from.
+
+                    d^3 becomes a problem when dimensionality grows, which brings us to
+                    our improved algorithm.
+                </aside>
+
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Randomized Subspace k-means</h2>
+            </section>
+            <section>
+                <h3>Transformation Matrix Approximation</h3>
+                <ul>
+                    <li>\(P_C P_C^T\) only keeps the first \(m\) eigenvalues</li>
+                    <li>compute rank-\(m\) approximation, \(\widetilde{V}\), using a randomized eigenvalue decomposition</li>
+                </ul>
+                <span class="fragment">
+                \[\mathcal{J} = \text{tr} \bigg( \widetilde{V}^T \underbrace{\bigg(\bigg[\sum_{i=1}^k S_i\bigg] - 
+                S_{\mathcal{D}} \bigg)}_{\Sigma} \widetilde{V} \bigg) + 
+                \underbrace{\text{tr} (\widetilde{V}^T S_{\mathcal{D}} \widetilde{V})}_{\text{const. w.r.t } \widetilde{V}}.\]
+                </span>
+
+                <aside class="notes" data-markdown>
+                    since the cluster subspace projection only keeps the first m eigenvalues, 
+                    we decided to compute a rank-m approximation to the transformation matrix using
+                    a randomized eigenvalue decomposition
+
+                    our modification results in a new objective function without the projection matrices
+                </aside>
+            </section>
+            <section>
+                <h3>Computational Complexity</h3>
+                <h5>before:</h5>
+                <span>\(\mathcal{O}\big(I(mk |\mathcal{D}| + d^2 |\mathcal{D}| + \)</span> 
+                <span class="fragment highlight-red" data-fragment-index="2">\(d^3\)</span>
+                <span>\()\big)\)</span>
+                <br /><br />
+                <span class="fragment" data-fragment-index="1">
+                    <h5>after:</h5>
+                    <span>\(\mathcal{O}\big(I(mk |\mathcal{D}| + d^2 |\mathcal{D}| + \)</span> 
+                    <span class="fragment highlight-orange" data-fragment-index="2">\(d^2 \log m\)</span>
+                    <span>\()\big)\)</span>
+                </span>
+
+                <aside class="notes" data-markdown>
+                    as a reminder, here's the computational complexity of the original algorithm.
+
+                    our algorithm improves the complexity by decreasing the complexity of the eigenvalue
+                    decomposition
+
+                    since m is typically much smaller than d, this results in signficant runtime improvements,
+                    which we demonstrate through a set of experiments. 
+                </aside>
+            </section>
+
         </section>
         <section id="experiments">
             <section>
                 <h2>Experiments</h2>
             </section>
-            <section data-markdown>
-                    <div class="flexbox-container">
+            <section>
+                <div class="flexbox-container">
+                    <div class="flex-column" style="text-align: left;">
                         <div>
-                            <h5>Tests</h5>
-                            <div class="flexbox-container">
-                                <div>
-                                    <textarea data-template>
-                                    ###### Synthetic data
-                                    - runtime vs dimensions
-                                    - runtime vs instances
-                                    </textarea>
-                                </div>
-                                <div>
-                                    <textarea data-template>
-                                    ###### Real datasets
-                                    - runtime
-                                    - clustering quality
-                                    </textarea>
-                                </div>
-                            </div>
+                            <h4>Synthetic Data</h4>
+                            <ul>
+                                <li>runtime vs dimensions</li>
+                                <li>runtime vs instances</li>
+                            </ul>
                         </div>
                         <div>
-                            <textarea data-template>
-                            ##### Algorithms
-                            - Subspace k-means
-                            - Randomized Subspace k-means
-                            - PCA k-means
-                            - LDA k-means
-                            </textarea>
+                            <h4>Real Datasets</h4>
+                            <ul>
+                                <li>clustering quality</li>
+                                <li>runtime</li>
+                            </ul>
                         </div>
+                        </div>
+                    <div style="text-align: left;">
+                        <h4>Algorithms</h4>
+                        <ul>
+                            <li>Subspace k-means</li>
+                            <li>Randomized Subspace k-means</li>
+                            <li>PCA k-means</li>
+                            <li>LDA k-means</li>
+                        </ul>
                     </div>
-                </textarea>
+                </div>
 
+                <aside class="notes" data-markdown>
+                    - to demonstrate our runtime improvements, we ran experiments on synthetic datasets
+                    - we also ran experiments on real datasets
+                        - ensure clustering quality is still good.
+                        - runtime improvement
+
+                    We tested on the following algorithms:
+                    - original subspace k-means
+                    - our algorithm
+                    - PCA k-means
+                        - performs PCA, then k-means in the reduced space
+                    - LDA k-means
+                        - alternates between LDA for subspace projection and k-means for clustering
+                </aside>
             </section>
-            <section id="datasets" data-markdown>
-                <textarea data-template >
-                    ### Datasets
-
-                    |                 | Features | Instances | Classes |
-                    | --------------- | -------- | --------- | ------- |
-                    | Plane           | 114      | 210       | 7       |
-                    | Symbols         | 398      | 1020      | 6       |
-                    | OliveOil        | 570      | 60        | 4       |
-                    | StarLightCurves | 1024     | 9236      | 3       |
-                    | DrivFace        | 6400     | 606       | 3       |
-                    | RNA-Seq         | 20531    | 801       | 5       |
-                </textarea>
-
+            <section id="datasets">
+                <h3>Datasets</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Features</th>
+                            <th>Instances</th>
+                            <th>Classes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Plane</th>
+                            <td>114</td>
+                            <td>210</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <th>Symbols</th>
+                            <td>398</td>
+                            <td>1020</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <th>OliveOil</th>
+                            <td>570</td>
+                            <td>60</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <th>StarLightCurves</th>
+                            <td>1024</td>
+                            <td>9236</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <th>DrivFace</th>
+                            <td>6400</td>
+                            <td>606</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <th>RNA-Seq</th>
+                            <td>20531</td>
+                            <td>801</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <aside class="notes" data-markdown>
+                    first three datasets were also tested in original paper. 
+                    these datasets weren't very big...
+                </aside>
             </section>
-
         </section>
         <section id="results">
             <section>
                 <h1>Results</h1>
-            </section>
-            <section>
-            	<p class="fragment" data-fragment-index="3">Appears last</p>
-            	<p class="fragment" data-fragment-index="1">Appears first</p>
-            	<p class="fragment" data-fragment-index="2">Appears second</p>
             </section>
             <section id="runtime vs dimension">
                 <h4>Runtime vs Dimension</h4>
                 <div class="stretch" style="position:relative; margin:0 auto;">
                     <img src="images/runtime_v_dim.svg" style="position:absolute;top:0;left:0"/>
                     <img class="fragment" data-fragment-index="1" src="images/runtime_v_dim2.svg" style="position:absolute;top:0;left:0"/>
-                    <img class="fragment" data-fragment-index="2" src="images/runtime_v_dim3.svg" style="position:absolute;top:0;left:0"/>
                 </div>
+                <aside class="notes" data-markdown>
+                    order of magnitude improvement in runtime!
+
+                    PCA k-means is fastest becaues it only does dimensionality reduction once at the beginning
+                </aside>
             </section>
             <section id="runtime vs size">
                 <h4>Runtime vs Size</h4>
                 <div class="stretch" style="position:relative; margin:0 auto;">
                     <img src="images/runtime_v_size.svg" style="position:absolute;top:0;left:0"/>
                     <img class="fragment" data-fragment-index="1" src="images/runtime_v_size2.svg" style="position:absolute;top:0;left:0"/>
-                    <img class="fragment" data-fragment-index="2" src="images/runtime_v_size3.svg" style="position:absolute;top:0;left:0"/>
                 </div>
+                <aside class="notes" data-markdown>
+                    slight improvement as number of instances grows
+                </aside>
             </section>
             <section id="dataset runtimes">
                 <h4>Dataset Runtimes</h4>
@@ -149,26 +458,134 @@
                     <img src="images/runtime_datasets.svg" style="position:absolute;top:0;left:0"/>
                     <img class="fragment" src="images/runtime_datasets2.svg" style="position:absolute;top:0;left:0"/>
                 </div>
+                <aside class="notes" data-markdown>
+                    performed better on all datasets
+
+                    one dataset was marginal
+                </aside>
             </section>
-            <section id="clustering quality" data-markdown>
-                <textarea data-template>
-                    ### Clustering Quality (NMI)
+            <section id="clustering quality">
+                <h3>Clustering Quality (NMI)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th align="left">Randomized Subspace k-means</th>
+                            <th align="left">Subspace k-means</th>
+                            <th align="left">PCA k-means</th>
+                            <th align="left">LDA k-means</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Plane</th>
+                            <td align="right"><strong style="color: #FF952B">0.835</strong></td>
+                            <td align="right">0.825</td>
+                            <td align="right">0.804</td>
+                            <td align="right">0.728</td>
+                        </tr>
+                        <tr>
+                            <th>Symbols</th>
+                            <td align="right"><strong style="color: #FF952B">0.788</strong></td>
+                            <td align="right">0.742</td>
+                            <td align="right">0.762</td>
+                            <td align="right">0.745</td>
+                        </tr>
+                        <tr>
+                            <th>OliveOil</th>
+                            <td align="right">0.609</td>
+                            <td align="right">0.657</td>
+                            <td align="right">0.673</td>
+                            <td align="right"><strong style="color: #FF952B">0.690</strong></td>
+                        </tr>
+                        <tr>
+                            <th>StarLight<br/>Curves</th>
+                            <td align="right"><strong style="color: #FF952B">0.546</strong></td>
+                            <td align="right">0.542</td>
+                            <td align="right">0.507</td>
+                            <td align="right">0.542</td>
+                        </tr>
+                        <tr>
+                            <th>DrivFace</th>
+                            <td align="right">0.191</td>
+                            <td align="right">0.205</td>
+                            <td align="right">0.203</td>
+                            <td align="right"><strong style="color: #FF952B">0.209</strong></td>
+                        </tr>
+                        <tr>
+                            <th>RNA-Seq</th>
+                            <td align="right">0.659</td>
+                            <td align="right">0.679</td>
+                            <td align="right"><strong style="color: #FF952B">0.680</strong></td>
+                            <td align="right">0.668</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    |                 | Randomized Subspace k-means | Subspace k-means | PCA k-means | LDA k-means |
-                    | --------------- | --------------------------: | ---------------: | ----------: | ----------: |
-                    | Plane           | **0.835** (`$m=6$`)            | 0.825            | 0.804       | 0.728       |
-                    | Symbols         | **0.788** (`$m=5$`)            | 0.742            | 0.762       | 0.745       |
-                    | OliveOil        | 0.609 (`$m=3$`)                | 0.657            | 0.673       | **0.690**   |
-                    | StarLightCurves | **0.546** (`$m=2$`)           | 0.542            | 0.507       | 0.542       |
-                    | DrivFace        | 0.191 (`$m=2$`)                | 0.205            | 0.203       | **0.209**   |
-                    | RNA-Seq         | 0.659 (`$m=4$`)                | 0.679            | **0.680**   | 0.668       |
-                </textarea>
-
+                <aside class="notes" data-markdown>
+                    - measured clustering quality via normalized mutual information (NMI)
+                    - similar NMI to original algorithm
+                    - performed best on half of the datasets
+                </aside>
             </section>
             <section id="subspace projections">
                 <h4>Subspace Projections</h4>
                 <img class="stretch" src="images/projections.svg" />
+                <aside class="notes" data-markdown>
+                    this figure shows the improved visual separation of clusters 
+                    found by our algorithm.
+
+                    even when NMI scores are similar, our algorithm visually separates
+                    the clusters better, which is good for interpretation.
+                </aside>
             </section>
+        </section>
+        <section id="conclusion">
+            <section>
+                <h2>Conclusions</h2>
+            </section>
+            <section>
+                <div class="flexbox-container">
+                    <div data-markdown>
+                        <textarea data-template>
+                            ### Highlights
+                            - significant performance increase
+                            - no reduction in clustering quality
+                        </textarea>
+                    </div>
+                    <div data-markdown>
+                        <texarea data-template>
+                            ### Future Work
+                            - improve scatter matrix complexity
+                            - k-means extensions
+                            - test on more/larger datasets
+                        </texarea>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <section id="end">
+            <h1>Questions?</h1>
+        </section>
+        <section id="supplimentary material">
+            <section id="NMI">
+                <h3>NMI</h3>
+                \[NMI(C, T)] = \frac{I(C,T)}{\sqrt{H(C) H(T)}}\]
+                <p>\(C \equiv\) cluster assignments</p>
+                <p>\(T \equiv\) ground truth</p>
+                <p>\(I(C,T) \equiv \) mutual information</p>
+                <p>\(H(C) \equiv \) entropy of cluster assignments</p>
+                <p>\(H(T) \equiv \) entropy of ground truth</p>
+            </section>
+            <section>
+                <h3>Randomized EVD</h3>
+                <p>Approximate range: \(Y = A \Omega\)</p>
+                <p>Obtain orthonormal basis: \(Y = QR\)</p>
+                <p>Factorize: \(A \approx QQ^*A\)</p>
+                <p>EVD on \(B = Q^* A\)</p>
+            </section>
+
         </section>
       </div>
     </div>
@@ -201,7 +618,7 @@ for (var i = 0; i < n; i++) {
 }
     </script>
 
-    <script src="reveal.js/lib/js/head.min.js"></script>
+    <!-- <script src="reveal.js/lib/js/head.min.js"></script> -->
     <script src="reveal.js/js/reveal.js"></script>
 
     <script>
@@ -235,25 +652,17 @@ Reveal.initialize({
         url: 'https://reveal-js-multiplex-ccjbegmaii.now.sh'
     },
 
-    // math: {
-	// 	mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js',
-	// 	config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-	// 	// pass other options into `MathJax.Hub.Config()`
-	// 	TeX: { Macros: macros }
-	// },
 
     // Optional libraries used to extend on reveal.js
     dependencies: [
-        { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
         { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
         { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-        { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        // { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
         { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
         { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
         { src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
         { src: 'reveal.js/plugin/multiplex/master.js', async: true },
         { src: 'reveal.js-menu/menu.js', async: true, condition: function() { return !!document.body.classList; } },
-        { src: 'reveal.js/plugin/math/math.js', async: true },
     ]
 });
 

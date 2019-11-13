@@ -42,9 +42,9 @@
      inkscape:window-height="1330"
      id="namedview2391"
      showgrid="false"
-     inkscape:zoom="1.6477273"
-     inkscape:cx="108.15899"
-     inkscape:cy="217.25974"
+     inkscape:zoom="3.2954546"
+     inkscape:cx="-29.303077"
+     inkscape:cy="168.70802"
      inkscape:window-x="-12"
      inkscape:window-y="-12"
      inkscape:window-maximized="1"
@@ -228,9 +228,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.28125"
-                   id="tspan1857">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan7584">−1</tspan>
+                   id="tspan1857"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1197">−1</tspan>
 </tspan>
               </text>
             </g>
@@ -271,8 +272,9 @@
                    x="0 7.6347661"
                    y="-0.171875"
                    id="tspan1872">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan7580">0</tspan>
+   style="font-size:12px;stroke-linecap:butt;stroke-linejoin:round"
+   id="tspan1195"
+   dy="-6">0</tspan>
 </tspan>
               </text>
             </g>
@@ -312,9 +314,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    id="tspan1887"
                    y="-0.28125"
-                   x="0 7.6347661">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan7578">1</tspan>
+                   x="0 7.6347661"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1193">1</tspan>
 </tspan>
               </text>
             </g>
@@ -354,9 +357,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';vector-effect:none;fill:#000000;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    x="0 7.6347661"
                    y="-0.171875"
-                   id="tspan1902">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan7576">2</tspan>
+                   id="tspan1902"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1191">2</tspan>
 </tspan>
               </text>
             </g>
@@ -396,9 +400,10 @@
                    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'source sans pro';-inkscape-font-specification:'source sans pro';stroke-linecap:butt;stroke-linejoin:round"
                    x="0 7.6347661"
                    y="-0.171875"
-                   id="tspan1917">10<tspan
-   style="font-size:64.99999762%;baseline-shift:super;stroke-linecap:butt;stroke-linejoin:round"
-   id="tspan7541">3</tspan>
+                   id="tspan1917"
+                   dy="0 0 -6">10<tspan
+   style="font-size:12px"
+   id="tspan1189">3</tspan>
 </tspan>
               </text>
             </g>

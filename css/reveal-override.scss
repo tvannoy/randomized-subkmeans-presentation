@@ -42,7 +42,7 @@
     }
 
     h1 {
-        font-size: 5em;
+        font-size: 4.5em;
     }
 
     h2 {
@@ -76,6 +76,10 @@
         font-size: 25%;
     }
 
+    li:not(:last-child) {
+        padding-bottom: 2%;
+    }
+
     .controls {
         div.navigate-up, div.navigate-up.enabled {
             border-bottom-color: black
@@ -96,7 +100,15 @@
 
     a {
         font-family: "Share Tech Mono", monospace !important;
-        white-space: nowrap;
+        word-break: break-word;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        -ms-word-break: break-all;
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        font-size: 0.8em;
     }
 
     code {
@@ -159,6 +171,34 @@
     .slides section .fragment {
         transition: all .6s ease;
     }
+
+    table {
+        white-space: pre-line;
+        th {
+            font-family: "Nunito", sans-serif;
+            word-wrap: break-word;
+            font-size: 0.8em;
+        }
+        td {
+            font-family: "Source Sans Pro", sans-serif;
+            color: #555555;
+            word-wrap: break-word;
+            font-size: 0.8em;
+        }
+    }
+
+    .slides section .fragment.highlight-orange,
+    .slides section .fragment.highlight-current-orange {
+        opacity: 1;
+        visibility: inherit;
+    }
+    .slides section .fragment.highlight-orange.visible {
+        color: #FF952B
+    }
+    .slides section .fragment.highlight-current-orange.current-fragment {
+        color: #FF952B
+    }
+
 }
 
 @media print {
