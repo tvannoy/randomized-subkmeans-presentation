@@ -1,0 +1,145 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+.reveal {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: normal;
+  color: #555555;
+  /* Make sure keyboard shortcuts help is visible */
+  /* Blow iframe up to full screen size */ }
+.reveal strong {
+  color: black; }
+.reveal section img {
+  /* Disable background 4px border around images */
+  border: none;
+  background: none;
+  /* Disable box shadow around images */
+  box-shadow: none;
+  /* Blow image up to full screen size */
+  height: auto;
+  width: 100%;
+  max-width: 95%;
+  max-height: 95%;
+  margin: 2%; }
+.reveal .overlay-help .viewport th, .reveal .overlay-help .viewport td {
+  color: white; }
+.reveal iframe {
+  height: 90%;
+  width: 100%;
+  margin: 2%; }
+.reveal h1 {
+  font-size: 4.5em; }
+.reveal h2 {
+  font-size: 3em; }
+.reveal h3 {
+  font-size: 1.5em; }
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  text-transform: none; }
+.reveal h1 strong, .reveal h2 strong, .reveal h3 strong, .reveal h4 strong, .reveal h5 strong, .reveal h6 strong {
+  color: black;
+  text-shadow: none;
+  font-weight: bold; }
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-variant: small-caps; }
+.reveal .progress span {
+  background-color: black; }
+.reveal sub {
+  font-size: 25%; }
+.reveal li:not(:last-child) {
+  padding-bottom: 2%; }
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+  border-bottom-color: black; }
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+  border-top-color: black; }
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+  border-right-color: black; }
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+  border-left-color: black; }
+.reveal a {
+  font-family: "Share Tech Mono", monospace !important;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -ms-word-break: break-all;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  font-size: 0.8em; }
+.reveal code {
+  font-family: "Source Code Pro", monospace !important;
+  color: black !important;
+  text-shadow: none;
+  text-transform: none; }
+.reveal pre code {
+  font-family: "Source Code Pro", monospace !important;
+  background: inherit !important;
+  text-shadow: none;
+  text-transform: none; }
+.reveal blockquote, .reveal q {
+  quotes: "“" "”" "‘" "’"; }
+.reveal blockquote:before, .reveal q:before {
+  content: open-quote; }
+.reveal blockquote:after, .reveal q:after {
+  content: close-quote; }
+.reveal blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px; }
+.reveal blockquote:before, .reveal blockquote:after {
+  color: #ccc;
+  font-size: 4em;
+  line-height: 0.1em;
+  vertical-align: -0.4em; }
+.reveal blockquote:before {
+  margin-right: 0.25em; }
+.reveal blockquote:after {
+  margin-left: 0.25em; }
+.reveal blockquote p {
+  display: inline; }
+.reveal .caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: small; }
+.reveal .slides section .fragment {
+  transition: all .6s ease; }
+.reveal table {
+  white-space: pre-line; }
+.reveal table th {
+  font-family: "Nunito", sans-serif;
+  word-wrap: break-word;
+  font-size: 0.8em; }
+.reveal table td {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #555555;
+  word-wrap: break-word;
+  font-size: 0.8em; }
+.reveal .slides section .fragment.highlight-orange, .reveal .slides section .fragment.highlight-current-orange {
+  opacity: 1;
+  visibility: inherit; }
+.reveal .slides section .fragment.highlight-orange.visible {
+  color: #FF952B; }
+.reveal .slides section .fragment.highlight-current-orange.current-fragment {
+  color: #FF952B; }
+
+@media print {
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    color: black; } }
+.qrcode img {
+  /* Override "block" display which qrcode.js sets by default, to allow
+     proper centering */
+  display: inline !important;
+  height: 40% !important;
+  width: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white !important;
+  padding: 1%; }
+
+/*# sourceMappingURL=reveal-override.css.map */
