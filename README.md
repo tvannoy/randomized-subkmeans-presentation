@@ -4,4 +4,4 @@ This is a presentation about Randomized Subspace k-means, an extension of the or
 This work was presented at IEEE GlobalSIP 2019.
 
 # Viewing the presentation
-This presentation can be viewed at [tvannoy.github.io/randomized-subkmeans-presentation](tvannoy.github.io/randomized-subkmeans-presentation)
+This presentation can be viewed at [tvannoy.github.io/randomized-subkmeans-presentation](https://tvannoy.github.io/randomized-subkmeans-presentation)
